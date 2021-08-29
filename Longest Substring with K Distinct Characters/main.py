@@ -17,6 +17,7 @@ def longest_substring_with_k_distinct(K, str):
 
     # extend window boundaries and store character frequencies in hash map
     for window_end in range(len(str)):
+
         right_char = str[window_end]  # get next character in str
 
         # print(str[window_start:window_end])
