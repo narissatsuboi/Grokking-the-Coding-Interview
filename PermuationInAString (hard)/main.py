@@ -19,6 +19,12 @@ from collections import Counter
 import unittest
 
 
+class TestFindPermutation(unittest.TestCase):
+    def test_find_permutation(self):
+        self.assertEqual(True, find_permutation("oidbcaf", "abc"))
+        self.assertEqual(False, find_permutation("odicf", "dc"))
+        self.assertEqual(True, find_permutation("bcdxabcdy", "bcdyabcdx"))
+
 def find_permutation(_str, pattern):
     """
     Sliding window approach.
@@ -62,13 +68,6 @@ def find_permutation(_str, pattern):
                 pattern_char_freq[left_char] += 1
 
     return False
-
-
- class TestFindPermutation(unittest.TestCase):
-     # def test_find_permutation(self):
-     #     self.assertEqual(True, find_permutation("oidbcaf", "abc"))
-     #     self.assertEqual(False, find_permutation("odicf", "dc"))
-     #     self.assertEqual(True, find_permutation("bcdxabcdy","bcdyabcdx"))
 
 if __name__ == '__main__':
     print("String Permutations")
