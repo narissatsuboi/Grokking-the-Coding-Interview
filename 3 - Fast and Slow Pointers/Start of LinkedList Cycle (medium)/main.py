@@ -7,13 +7,10 @@ the list?
 Input - CLL with cycle.
 Output - Starting node of cycle.
 
-Approach.
-1. Point slow and fast pointers to head
-2. Find length of cll - K
-3. Move fast ahead by K nodes
-4. Increment slow and fast by 1 until they meet
-5. Meeting point is at the start of the cycle
+1. Find cycle length
+2. Find cycle start node
 """
+
 
 # Node Structure
 class Node:
@@ -22,33 +19,51 @@ class Node:
         self.data = data
         self.next = None
 
-def find_start_cll(head):
-    cycle_length = 0
-    # find the cll cycle
-    slow, fast =
-    while fast is None and fast.next is not None:
+
+"""
+How to find cycle length
+1. Find the node where a slow and fast pointer overlap. 
+2. From that node, traverse the cycle until the traversal pointer is at the 
+starting point. 
+"""
 
 
-# Find start CLL helper function
-def calc_cycle_length(slow):
-    current = slow
-    cycle_length = 0
-    while True:
-        current = current.next
-        cycle_length += 1
-        if current == slow:
-            break
-    return cycle_length
-
-
-# Given the length of the cycle, return the starting node of the cycle
-def find_cll_start(head, cycle_length):
+def find_cycle_length(head):
     slow, fast = head, head
-    # move fast pointer ahead "cyle length" nodes
-    while cycle_length > 0:
+    while fast is not None and fast.next is not None:
+        slow = slow.next
+        fast = fast.next.next
+        # check for overlap, pass node to helper
+        if slow == fast:
+            cycle_len = find_cycle_length_helper(slow)
+            break
+    return find_cycle_start(head, cycle_len)
+
+
+def find_cycle_length_helper(slow):
+    curr = slow
+    cycle_len = 0  # accumulator
+    while True:
+        curr = curr.next
+        cycle_len = cycle_len.next
+        if curr == slow:
+            break
+    return cycle_len
+
+
+"""
+How to find the start of the cycle
+1. Given the length of the cycle, place two pointers at head and move the 
+fast pointer K nodes forward. 
+2. Increment slow and fast one time each iteration until they overlap.
+3. Return that node. 
+"""
+
+
+def find_cycle_start(head, cycle_len):
+    slow, fast = head, head
+    for i in cycle_len:
         fast = fast.next
-        cycle_length -= 1
-    # increment both until they meet
     while slow != fast:
         slow = slow.next
         fast = fast.next
@@ -56,4 +71,5 @@ def find_cll_start(head, cycle_length):
 
 
 if __name__ == '__main__':
+    print("test")
 
